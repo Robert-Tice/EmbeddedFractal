@@ -1,5 +1,6 @@
 with FT801;
 
+with Screen_Settings;
 
 package body Screen_Isr is
 
@@ -7,10 +8,10 @@ package body Screen_Isr is
          
       procedure Handler
       is
-         ISR_Flags : FT801.Interrupt_Flags;
+         ISR_Flags : FT801.Interrupts;
       begin
-         if Interrupt_Line.Periph.PIO_ISR.Arr (Interrupt_Line.Pin) then
-            ISR_Flags := Screen.Read_Interrupts;
+         if Interrupt_Line.Read_Interrupt_Status then
+            ISR_Flags := FT801.Read_Interrupts (This => Screen_Settings.Screen);
             if ISR_Flags.Swap then
                --  Display list swap occurred
                --  TODO: fill this in

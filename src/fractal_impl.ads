@@ -20,7 +20,7 @@ package Fractal_Impl is
    
 private
    
-   Current_Computation : Computation_Enum := Fixed_Type;
+   Current_Computation : Computation_Enum := Float_Type;
 
    type Real_Float is new Float;
 

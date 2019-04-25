@@ -23,27 +23,20 @@ is
                                                Height => Image_Height,
                                                Zoom   => <>,
                                                Center => (X => Image_Width / 2,
-                                                          Y => Image_Height / 2));
-   
-   Screen_Power_Down : SAM.GPIO.GPIO_Point renames SAM.Device.PA5;
-   
-   SPI_Port          : SAM.SPI.SPI_Port renames SAM.Device.SPI_0_Cs1;
+                                                          Y => Image_Height / 2)); 
 
    MISO  : SAM.GPIO.GPIO_Point renames SAM.Device.PD20;
    MOSI  : SAM.GPIO.GPIO_Point renames SAM.Device.PD21;
    SPCK  : SAM.GPIO.GPIO_Point renames SAM.Device.PD22;
    NPCS1 : SAM.GPIO.GPIO_Point renames SAM.Device.PD25;
 
-   SPI_Cfg     : SAM.SPI.Configuration := (Baud           => 10_000_000,
-                                           Tx_On_Rx_Empty => False,
-                                           others         => <>);
+   SPI_Cfg_Init : SAM.SPI.Configuration := (Baud           => 10_000_000,
+                                            Tx_On_Rx_Empty => False,
+                                            others         => <>);
    
-   Screen_Cfg   : FT801.Display_Settings := (Width  => Screen_Width,
-                                             Height => Screen_Height,
-                                             others => <>);
-   
-   Screen      : FT801.FT801_Device (Port     => SPI_Port'Access,
-                                     PD       => Screen_Power_Down'Access);
+   SPI_Cfg      : SAM.SPI.Configuration := (Baud           => 30_000_000,
+                                            Tx_On_Rx_Empty => False,
+                                            others         => <>);
    
    procedure Initialize_GPIOs is
       use SAM.GPIO;
@@ -84,8 +77,8 @@ is
                                      AF_Output_Type => Push_Pull,
                                      AF             => Periph_B));
 
-      SAM.SPI.Configure (This => SPI_Port,
-                         Cfg  => SPI_Cfg);
+      SAM.SPI.Configure (This => Screen_Settings.SPI_Port,
+                         Cfg  => SPI_Cfg_Init);
    end Initialize_SPI;
    
    procedure Initialize_Fractal
@@ -102,17 +95,22 @@ is
    begin
       FT801.Initialize (This => Screen,
                         Settings => Screen_Cfg);
+      
+      SAM.SPI.Configure (This => Screen_Settings.SPI_Port,
+                         Cfg  => SPI_Cfg);
+      
+      FT801.Display_On (This => Screen);
 
---        FT801.Draw_Rectangle (This => Screen,
---                              Lower_Left => FT801.Screen_Coordinate'(X => 0,
---                                                               Y => Header_Height),
---                              Upper_Right => FT801.Screen_Coordinate'(X => Screen_Width,
---                                                                Y => 0),
---                              Fill => True);
+      --        FT801.Draw_Rectangle (This => Screen,
+      --                              Lower_Left => FT801.Screen_Coordinate'(X => 0,
+      --                                                               Y => Header_Height),
+      --                              Upper_Right => FT801.Screen_Coordinate'(X => Screen_Width,
+      --                                                                Y => 0),
+      --                              Fill => True);
       --  This is the fixed point button
-    --  Screen.Draw_Button ();
+      --  Screen.Draw_Button ();
       --  this is the floating point button
-     -- Screen.Draw_Button ();
+      -- Screen.Draw_Button ();
       
       --  this is the reset zoom button
       --      Screen.Draw_Button ();

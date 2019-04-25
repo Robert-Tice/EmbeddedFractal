@@ -11,7 +11,7 @@ package body Fractal_Impl is
       Ret : Buffer_Offset;
    begin
       
-      case Comp_Type is
+      case Current_Computation is
          when Fixed_Type =>
             Fixed_Julia_Fractal.Increment_Frame;
             Fixed_Julia_Fractal.Calculate_Image 
@@ -26,6 +26,12 @@ package body Fractal_Impl is
        
       return Ret;
    end Compute_Image;
+   
+   procedure Set_Computation_Type (Comp_Type : Computation_Enum)
+   is
+   begin
+      Current_Computation := Comp_Type;
+   end Set_Computation_Type;
    
    
 end Fractal_Impl;
