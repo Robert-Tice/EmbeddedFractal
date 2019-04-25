@@ -1,4 +1,4 @@
-with "AdaFractalLib/adafractallib.gpr";
+with "../AdaFractalLib/adafractallib.gpr";
 with "../../AdaCore/Ada_Drivers_Library/boards/samv71_xplained/samv71_xplained_full.gpr";
 
 project EmbeddedFractal extends "../../AdaCore/Ada_Drivers_Library/examples/shared/common/common.gpr" is
