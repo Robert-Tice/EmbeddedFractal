@@ -1,3 +1,5 @@
+with Ada.Real_Time; use Ada.Real_Time;
+
 with System;
 
 with SAM.Device;
@@ -9,21 +11,24 @@ with HAL.SPI; use HAL.SPI;
 with SAM.GPIO;
 with SAM.SPI;
 with FT801;
+with FT801.Coproc;
+with FT801.Display_List;
 
 with Fractal_Impl; use Fractal_Impl;
-with Image_Types; use Image_Types;
+with Image_Types;
 
 with Screen_ISR;
 with Screen_Settings; use Screen_Settings;
 
 procedure Main
 is
+   use RGB565_Image_Types;
    
-   Viewport    : Image_Types.Viewport_Info := (Width  => Image_Width,
-                                               Height => Image_Height,
-                                               Zoom   => <>,
-                                               Center => (X => Image_Width / 2,
-                                                          Y => Image_Height / 2)); 
+   Viewport    : Viewport_Info := (Width  => Image_Width,
+                                   Height => Image_Height,
+                                   Zoom   => 12,
+                                   Center => (X => Image_Width / 2,
+                                              Y => Image_Height / 2)); 
 
    MISO  : SAM.GPIO.GPIO_Point renames SAM.Device.PD20;
    MOSI  : SAM.GPIO.GPIO_Point renames SAM.Device.PD21;
@@ -32,11 +37,19 @@ is
 
    SPI_Cfg_Init : SAM.SPI.Configuration := (Baud           => 10_000_000,
                                             Tx_On_Rx_Empty => False,
+                                            Cs_Beh         => SAM.SPI.Keep_Low,
                                             others         => <>);
    
    SPI_Cfg      : SAM.SPI.Configuration := (Baud           => 30_000_000,
                                             Tx_On_Rx_Empty => False,
+                                            Cs_Beh         => SAM.SPI.Keep_Low,
                                             others         => <>);
+   
+   procedure Wait (Period : Time_Span)
+   is
+   begin
+      delay until (Period + Clock);
+   end Wait;
    
    procedure Initialize_GPIOs is
       use SAM.GPIO;
@@ -54,7 +67,7 @@ is
       Screen_Power_Down.Configure_IO
         (Config => GPIO_Port_Configuration'(Mode        => Mode_Out,
                                             Resistors   => <>,
-                                            Output_Type => Open_Drain));
+                                            Output_Type => Push_Pull));
    end Initialize_GPIOs;
 
    procedure Initialize_SPI is
@@ -85,13 +98,10 @@ is
    is
    begin
       Fractal_Impl.Init (Viewport => Viewport);
-   end Initialize_Fractal;
+   end Initialize_Fractal;                                
    
    procedure Initialize_Screen
    is
-      Offset : Buffer_Offset;
-      Screen_Data : UInt8_Array (1 .. Fractal_Impl.Buffer_Size)
-        with Address => RawData.all'Address;
    begin
       FT801.Initialize (This => Screen,
                         Settings => Screen_Cfg);
@@ -100,29 +110,11 @@ is
                          Cfg  => SPI_Cfg);
       
       FT801.Display_On (This => Screen);
-
-      --        FT801.Draw_Rectangle (This => Screen,
-      --                              Lower_Left => FT801.Screen_Coordinate'(X => 0,
-      --                                                               Y => Header_Height),
-      --                              Upper_Right => FT801.Screen_Coordinate'(X => Screen_Width,
-      --                                                                Y => 0),
-      --                              Fill => True);
-      --  This is the fixed point button
-      --  Screen.Draw_Button ();
-      --  this is the floating point button
-      -- Screen.Draw_Button ();
-      
-      --  this is the reset zoom button
-      --      Screen.Draw_Button ();
-      
-      Offset := Fractal_Impl.Compute_Image;
-      FT801.Draw_Bitmap (This => Screen,
-                         Format => Ft801.PALETTED,
-                         Width => Image_Width,
-                         Height => Image_Height,
-                         Img => Screen_Data);
+        
    end Initialize_Screen;
    
+   Screen_Data : UInt8_Array (1 .. Natural (Fractal_Impl.Buffer_Size))
+     with Address => RawDataRow.all'Address;
 begin
 
    Initialize_GPIOs;
@@ -132,6 +124,50 @@ begin
    Initialize_Screen;
    
    loop
-      null;
+      for I in 1 .. Image_Height loop
+         Fractal_Impl.Compute_Row (Row    => I,
+                                   Buffer => RawDataRow);
+         FT801.Fill_G_Ram (This   => Screen,
+                           Start  => UInt22 (I - 1) * UInt22 (Buffer_Size),
+                           Buffer => Screen_Data);
+      end loop;
+      Fractal_Impl.Increment_Frame;
+   
+      FT801.Coproc.Send_Coproc_Cmds (This => Screen,
+                                     Cmds => (FT801.Coproc.CMD_DLSTART,
+                                              FT801.Display_List.Clear'(Color   => True,
+                                                                        Stencil => True,
+                                                                        Tag     => True,
+                                                                        others  => <>).Val,
+                                              FT801.Display_List.Bitmap_Source'(Addr    => FT801.RAM_G_Address,
+                                                                                others  => <>).Val,
+                                              FT801.Display_List.Bitmap_Layout'(Format     => Ft801.RGB565,
+                                                                                Linestride => UInt10 (Linestride),
+                                                                                Height     => Image_Height,
+                                                                                others     => <>).Val,
+                                              FT801.Display_List.Bitmap_Size'(Filter  => FT801.Display_List.NEAREST,
+                                                                              Wrapx   => FT801.Display_List.BORDER,
+                                                                              WrapY   => FT801.Display_List.BORDER,
+                                                                              Width   => Image_Width,
+                                                                              Height  => Image_Height,
+                                                                              others  => <>).Val,
+                                              FT801.Display_List.Cmd_Begin'(Prim    => FT801.Display_List.BITMAPS,
+                                                                            others  => <>).Val,
+                                              FT801.Display_List.ColorRGB'(Red    => 255,
+                                                                           Blue   => 255,
+                                                                           Green  => 255,
+                                                                           others => <>).Val,
+                                              FT801.Display_List.Vertex2ii'(X      => Image_Pos_X,
+                                                                            Y      => Image_Pos_Y,
+                                                                            Handle => 0,
+                                                                            Cell   => 0,
+                                                                            others => <>).Val,
+                                              FT801.Display_List.Cmd_End'(others => <>).Val,
+                                              FT801.Display_List.Display'(others => <>).Val,
+                                              FT801.Coproc.CMD_DLSWAP));
+      FT801.Wait_For_Coproc_Sync (This => Screen);
+      Wait (Period => Milliseconds (2));
+
    end loop;
+
 end Main;

@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<Locations>
+  <Project>
+    <vfs_file />
+    <file_marker column=" 56" line=" 29" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 25" line=" 287" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/AdaCore/Ada_Drivers_Library/components/src/screen/FT801/ft801.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 79" line=" 14" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/screen_isr.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 54" line=" 32" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/AdaCore/Ada_Drivers_Library/components/src/screen/FT801/ft801-registers.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 19" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/fractal_impl.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 56" line=" 29" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 53" line=" 30" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/AdaCore/Ada_Drivers_Library/components/src/screen/FT801/ft801.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 41" line=" 147" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/AdaCore/Ada_Drivers_Library/arch/ARM/SAM/drivers/sam-spi.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 18" line=" 7" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/AdaCore/Ada_Drivers_Library/arch/ARM/SAM/drivers/sam-spi.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 21" line=" 36" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/AdaCore/Ada_Drivers_Library/components/src/screen/FT801/ft801-registers.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 167" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/AdaCore/Ada_Drivers_Library/components/src/screen/FT801/ft801-display_list.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 38" line=" 40" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/AdaCore/Ada_Drivers_Library/components/src/screen/FT801/ft801-coproc.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/AdaFractalLib/src/fractal.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 31" line=" 14" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/fractal_impl.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 70" line=" 133" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/AdaCore/Ada_Drivers_Library/arch/ARM/SAM/drivers/sam-gpio.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 19" line=" 6" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/screen_isr.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 40" line=" 22" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/screen_settings.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 40" line=" 36" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 14" line=" 16" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 23" line=" 40" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 119" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 10" line=" 101" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 20" line=" 25" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/src/main.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 4" line=" 31" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 48" line=" 30" >
+      <vfs_project />
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 39" line=" 24" >
+      <vfs_project>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_project>
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 23" line=" 21" >
+      <vfs_project>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_project>
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 37" line=" 14" >
+      <vfs_project>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_project>
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_file>
+    </file_marker>
+    <file_marker column=" 23" line=" 21" >
+      <vfs_project>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_project>
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 4" line=" 24" >
+      <vfs_project>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_project>
+      <vfs_file>/media/psf/development/ada_dev/EmbeddedFractal/embeddedfractal.gpr</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>
